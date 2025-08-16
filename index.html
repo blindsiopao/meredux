@@ -123,19 +123,11 @@
             <marquee scrollamount="8" class="songtitle"></marquee>
         </div>
 
-        <table class="controls">
-            <tr>
-                <td>
-                    <div class="prev-track" onclick="prevTrack()"><i class="fas fa-backward"></i></div>
-                </td>
-                <td>
-                    <div class="playpause-track" onclick="playpauseTrack()" ><i class="fas fa-play"></i></div>
-                </td>
-                <td>
-                    <div class="next-track" onclick="nextTrack()"><i class="fas fa-forward"></i></div>
-                </td>
-            </tr>
-        </table>
+       <div class="controls">
+  <div class="prev-track" onclick="prevTrack()"><i class="fas fa-backward"></i></div>
+  <div class="playpause-track" onclick="playpauseTrack()"><i class="fas fa-play"></i></div>
+  <div class="next-track" onclick="nextTrack()"><i class="fas fa-forward"></i></div>
+</div>
 
         <div class="seeking">
             <div class="current-time">00:00</div>
@@ -484,17 +476,26 @@ z-index: 1;
         display:block;
     }
 
-    .controls{
-        font-size:18px !important; /* size of controls */
-        background-color:#E0844A; /* background color of controls */
-        text-align:center;
-        width:100%;
-    }
+   .controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* space between buttons */
+  font-size: 18px !important;
+  background-color: #E0844A;
+  padding: 8px 0;
+  border-radius: 4px;
+}
 
-    .controls td{
-        padding:8px 5px 0px 5px; /* padding around controls */
-    }
+.controls div {
+  cursor: pointer;
+}
 
+.controls i.fas.fa-pause, 
+.controls i.fas.fa-play, 
+.controls i.fas.fa-forward, 
+.controls i.fas.fa-backward {
+  color: #4D1E00;
+}
     .seeking{
         background-color:#E0844A; /* background color of seeking bar */
         display:flex;
