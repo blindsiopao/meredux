@@ -12,6 +12,60 @@
 
 
 
+
+
+
+
+
+<script>
+  const playlist = [
+    "https://files.catbox.moe/mmhk5o.mp4",
+    "https://files.catbox.moe/z4g3he.mp4",
+    "https://files.catbox.moe/u2q7i3.mp4"
+  ];
+
+  const player = document.getElementById("playlistPlayer");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  let currentIndex = 0;
+
+  function loadVideo(index) {
+    if (index >= 0 && index < playlist.length) {
+      currentIndex = index;
+      player.src = playlist[currentIndex];
+      player.play();
+    }
+  }
+
+  // Auto-play next when current video ends
+  player.addEventListener("ended", () => {
+    const nextIndex = currentIndex + 1 < playlist.length ? currentIndex + 1 : 0;
+    loadVideo(nextIndex);
+  });
+
+  // Previous button
+  prevBtn.addEventListener("click", () => {
+    const prevIndex = currentIndex - 1 >= 0 ? currentIndex - 1 : playlist.length - 1;
+    loadVideo(prevIndex);
+  });
+
+  // Next button
+  nextBtn.addEventListener("click", () => {
+    const nextIndex = currentIndex + 1 < playlist.length ? currentIndex + 1 : 0;
+    loadVideo(nextIndex);
+  });
+
+  // Optional: autoplay first video on load
+  window.addEventListener("load", () => {
+    player.src = playlist[currentIndex];
+    // player.play(); // uncomment if you want autoplay on page load
+  });
+</script>
+
+
+	
+
 	
   <body>
 
@@ -25,6 +79,13 @@
   </video>
 </div>
 
+
+	  <div class="video-controls">
+  <button id="prevBtn">◀ Prev</button>
+  <button id="nextBtn">Next ▶</button>
+</div>
+
+	  
 
 	<div class="image-box">
 
@@ -396,6 +457,34 @@ z-index: 1;
   mix-blend-mode: screen; /* Optional: helps blend with video */
 	  border-radius: 8px;
 }
+
+
+
+
+
+	.video-controls {
+  position: fixed;
+  top: 540px; /* adjust based on where your video ends */
+  left: 900px; /* same as video box left */
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+
+.video-controls button {
+  background-color: #1F1109;
+  color: #F5E3A6;
+  border: 1px solid #3c5832;
+  font-family: "VT-100", monospace;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.video-controls button:hover {
+  background-color: #3c5832;
+}
+
+	
     </style>
   
   </body>
