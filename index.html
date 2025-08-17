@@ -74,7 +74,7 @@
         <div class="playtext">kill bill</div>
     </div><!--play-->
  
-<audio id="tune" src="https://dl.dropbox.com/s/p23de4jn8gmwolk/Eng%20Lyrics.mp3" type="audio"></audio>
+<audio id="tune"></audio>
 </div><!--musicplayer-->
 	
 
@@ -615,74 +615,46 @@ z-index: 1;
 
 
 
-
 <script>
-$(document).ready(function () {
-    const audio = document.getElementById('tune');
-    const songs = [
-        {
-            title: "Kill Bill",
-            url: "https://dl.dropbox.com/s/p23de4jn8gmwolk/Eng%20Lyrics.mp3"
-        },
-        {
-            title: "Song 2",
-            url: "https://example.com/song2.mp3"
-        },
-        {
-            title: "Song 3",
-            url: "https://example.com/song3.mp3"
-        }
-    ];
+  const songs = [
+    { title: "Kill Bill", url: "https://dl.dropbox.com/s/p23de4jn8gmwolk/Eng%20Lyrics.mp3" },
+    { title: "Another Song", url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" }
+  ];
 
-    let currentSong = 0;
+  let currentSong = 0;
+  const audio = document.getElementById("tune");
+  const playBtn = document.querySelector(".playy");
+  const pauseBtn = document.querySelector(".pausee");
+  const title = document.getElementById("song-title");
 
-    function loadSong(index) {
-        audio.src = songs[index].url;
-        $(".playtext").text(songs[index].title);
-    }
+  function loadSong(index) {
+    audio.src = songs[index].url;
+    title.textContent = songs[index].title;
+  }
 
-    function playSong() {
-        audio.play();
-        $(".playy").hide();
-        $(".pausee").show();
-    }
+  function playSong() {
+    audio.play();
+    playBtn.style.display = "none";
+    pauseBtn.style.display = "inline";
+  }
 
-    function pauseSong() {
-        audio.pause();
-        $(".pausee").hide();
-        $(".playy").show();
-    }
+  function pauseSong() {
+    audio.pause();
+    playBtn.style.display = "inline";
+    pauseBtn.style.display = "none";
+  }
 
-    $(".playy").click(function () {
-        playSong();
-    });
-
-    $(".pausee").click(function () {
-        pauseSong();
-    });
-
-    $(".next").click(function () {
-        currentSong = (currentSong + 1) % songs.length;
-        loadSong(currentSong);
-        playSong();
-    });
-
-    $(".prev").click(function () {
-        currentSong = (currentSong - 1 + songs.length) % songs.length;
-        loadSong(currentSong);
-        playSong();
-    });
-
-    // Optionally autoplay the next song when current ends
-    audio.addEventListener("ended", function () {
-        currentSong = (currentSong + 1) % songs.length;
-        loadSong(currentSong);
-        playSong();
-    });
-
-    // Load the first song on page load
+  function nextSong() {
+    currentSong = (currentSong + 1) % songs.length;
     loadSong(currentSong);
-});
+    playSong();
+  }
+
+  playBtn.addEventListener("click", playSong);
+  pauseBtn.addEventListener("click", pauseSong);
+  audio.addEventListener("ended", nextSong);
+
+  loadSong(currentSong); // Initial load
 </script>
 
 
