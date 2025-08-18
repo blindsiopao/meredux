@@ -13,7 +13,6 @@
 
 
 	  
-  </head>
 
 
 
@@ -56,11 +55,26 @@
 
 <div class="top-right-image">
 
-<div id="music-player">
-<div class="pixel"> <img src="https://dl.dropbox.com/s/8utvn4n7itvjge9/F3D14112-AD68-427C-A757-0F0FEF6B073A.gif"> </div><div class="note"><p id="music-note">♪</p></div>
-</div>
+  <div class="vinyl-wrapper">
+    <img src="https://i.imgur.com/MglggeP.png">
+    <div class="info-bar">
+      <span id="song-title">No song playing</span>
+      <button id="play-btn">▶️</button>
+      <button id="next-btn">⏭️</button>
+    </div>
+  </div>
 
-<audio id="audio" src="https://dl.dropbox.com/s/z1vhj5ecqxzrmso/yt1s.com%20-%20%EB%82%98%EC%9D%B8%EB%AE%A4%EC%A7%80%EC%8A%A49MUSES%20%EA%B1%B4GUN%20%EC%95%88%EB%AC%B4%EC%97%B0%EC%8A%B5%20%EC%98%81%EC%83%81%EA%B3%B5%EA%B0%9C.mp3"></audio>
+  <div class="modal" id="song-modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal">&times;</span>
+      <h2>Select a Song</h2>
+      <ul id="song-list">
+        <!-- Song items will be added dynamically -->
+      </ul>
+    </div>
+  </div>
+
+  <audio id="audio-player" src=""></audio>
 	
 </div>
 
@@ -471,52 +485,115 @@ z-index: 1;
 }
 
 
+body {
+      font-family: sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding-top: 100px;
+    }
 
-	#music-player {
-height: 2.125em;
-width: 2.125em;
-border-radius: 50%;
-border: 3px double black;
-transition: all 0.35s ease;
-background: #FF78BC;
-display: inline-flex;
-overflow: hidden;
-align-items: center;
-justify-content: left;
-}
- 
-#music-player > div {
-margin: 0.25em;
-}
- 
-.pixel {
-flex: 66%;
-justify-content: left;
-}
- 
-.note {
-color: black;
-font-size: 1.5em;
-justify-content: center;
-flex: 33%;
-}
- 
-.note p {
-transform: rotate(20deg);
-}
- 
-#music-player:hover {
-border: 3px solid #A80402;
-width: 6.125em;
-border-radius: 0.625em;
-}
+    .vinyl-wrapper {
+      position: relative;
+      display: inline-block;
+    }
 
+    .vinyl {
+      width: 200px;
+      height: 200px;
+      transition: transform 0.3s;
+      cursor: pointer;
+    }
+
+    .vinyl:hover {
+      animation: spin 4s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    .info-bar {
+      position: absolute;
+      bottom: -50px;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .vinyl-wrapper:hover .info-bar {
+      display: flex;
+    }
+
+    button {
+      background: #333;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background: #555;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .modal-content {
+      background-color: #222;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 80%;
+      color: white;
+      max-width: 600px;
+    }
+
+    .close-btn {
+      float: right;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    ul#song-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    ul#song-list li {
+      padding: 8px;
+      border-bottom: 1px solid #444;
+      cursor: pointer;
+    }
+
+    ul#song-list li:hover {
+      background: #333;
+    }
+
+    ul#song-list li.active {
+      font-weight: bold;
+      color: #1db954;
+    }
 	
 
 
-
 	</style>
-
+	</head>
 
 		
   </body>
@@ -544,11 +621,102 @@ border-radius: 0.625em;
 
 
 
+ <script>
+    const songs = [
+      {
+        title: "MY PRAYER - the platter",
+        src: "https://files.catbox.moe/nw10rq.mp3"
+      },
+      {
+        title: "",
+        src: ""
+      },
+      {
+        title: "",
+        src: ""
+      }
+    ];
 
-<script>
-document.getElementById("music-note").onclick = function() {
-var audio = document.getElementById("audio");
-if (audio.paused) audio.play();
-else audio.pause();
-};
-</script>
+    let currentSong = 0;
+
+    const audio = document.getElementById('audio-player');
+    const songTitle = document.getElementById('song-title');
+    const playBtn = document.getElementById('play-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const vinyl = document.getElementById('vinyl');
+    const modal = document.getElementById('song-modal');
+    const closeModal = document.getElementById('close-modal');
+    const songList = document.getElementById('song-list');
+
+    // Load current song
+    function loadSong(index) {
+      currentSong = index;
+      audio.src = songs[index].src;
+      songTitle.textContent = songs[index].title;
+      audio.play();
+      playBtn.textContent = '⏸️';
+      updateSongListUI();
+    }
+
+    // Play/Pause toggle
+    playBtn.addEventListener('click', () => {
+      if (audio.src === '') {
+        loadSong(currentSong);
+        return;
+      }
+      if (audio.paused) {
+        audio.play();
+        playBtn.textContent = '⏸️';
+      } else {
+        audio.pause();
+        playBtn.textContent = '▶️';
+      }
+    });
+
+    // Next song
+    nextBtn.addEventListener('click', () => {
+      currentSong = (currentSong + 1) % songs.length;
+      loadSong(currentSong);
+    });
+
+    // Auto-play next song
+    audio.addEventListener('ended', () => {
+      currentSong = (currentSong + 1) % songs.length;
+      loadSong(currentSong);
+    });
+
+    // Show modal
+    vinyl.addEventListener('click', () => {
+      modal.style.display = 'block';
+    });
+
+    // Close modal
+    closeModal.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    // Click outside modal to close
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Build song list in modal
+    function updateSongListUI() {
+      songList.innerHTML = '';
+      songs.forEach((song, index) => {
+        const li = document.createElement('li');
+        li.textContent = song.title;
+        if (index === currentSong) li.classList.add('active');
+        li.addEventListener('click', () => {
+          loadSong(index);
+          modal.style.display = 'none';
+        });
+        songList.appendChild(li);
+      });
+    }
+
+    // Initialize list on page load
+    updateSongListUI();
+  </script>
