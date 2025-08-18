@@ -55,8 +55,10 @@
 
 <div class="top-right-image">
 
+  
+ <div class="top-right-image">
   <div class="vinyl-wrapper">
-    <img src="https://i.imgur.com/MglggeP.png">
+    <img src="https://i.imgur.com/MglggeP.png" class="vinyl" id="vinyl" alt="Vinyl Record">
     <div class="info-bar">
       <span id="song-title">No song playing</span>
       <button id="play-btn">▶️</button>
@@ -68,14 +70,12 @@
     <div class="modal-content">
       <span class="close-btn" id="close-modal">&times;</span>
       <h2>Select a Song</h2>
-      <ul id="song-list">
-        <!-- Song items will be added dynamically -->
-      </ul>
+      <ul id="song-list"></ul>
     </div>
   </div>
 
   <audio id="audio-player" src=""></audio>
-	
+</div>
 </div>
 
 
@@ -485,113 +485,114 @@ z-index: 1;
 }
 
 
-body {
-      font-family: sans-serif;
-      background-color: #111;
-      color: #fff;
-      text-align: center;
-      padding-top: 100px;
+.top-right-image {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 190px;
+    z-index: 9999;
+  }
+
+  .vinyl-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+
+  .vinyl {
+    width: 200px;
+    height: 200px;
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+
+  .vinyl:hover {
+    animation: spin 4s linear infinite;
+  }
+
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
     }
+  }
 
-    .vinyl-wrapper {
-      position: relative;
-      display: inline-block;
-    }
+  .info-bar {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+  }
 
-    .vinyl {
-      width: 200px;
-      height: 200px;
-      transition: transform 0.3s;
-      cursor: pointer;
-    }
+  .vinyl-wrapper:hover .info-bar {
+    display: flex;
+  }
 
-    .vinyl:hover {
-      animation: spin 4s linear infinite;
-    }
+  button {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
 
-    @keyframes spin {
-      100% { transform: rotate(360deg); }
-    }
+  button:hover {
+    background: #555;
+  }
 
-    .info-bar {
-      position: absolute;
-      bottom: -50px;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.8);
-      display: none;
-      justify-content: space-around;
-      align-items: center;
-      padding: 10px;
-      border-radius: 5px;
-    }
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
 
-    .vinyl-wrapper:hover .info-bar {
-      display: flex;
-    }
+  .modal-content {
+    background-color: #222;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    color: white;
+    max-width: 600px;
+  }
 
-    button {
-      background: #333;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
+  .close-btn {
+    float: right;
+    font-size: 28px;
+    cursor: pointer;
+  }
 
-    button:hover {
-      background: #555;
-    }
+  ul#song-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+  }
 
-    /* Modal Styles */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 10;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.8);
-    }
+  ul#song-list li {
+    padding: 8px;
+    border-bottom: 1px solid #444;
+    cursor: pointer;
+  }
 
-    .modal-content {
-      background-color: #222;
-      margin: 10% auto;
-      padding: 20px;
-      border-radius: 10px;
-      width: 80%;
-      color: white;
-      max-width: 600px;
-    }
+  ul#song-list li:hover {
+    background: #333;
+  }
 
-    .close-btn {
-      float: right;
-      font-size: 28px;
-      cursor: pointer;
-    }
-
-    ul#song-list {
-      list-style: none;
-      padding: 0;
-      margin-top: 20px;
-    }
-
-    ul#song-list li {
-      padding: 8px;
-      border-bottom: 1px solid #444;
-      cursor: pointer;
-    }
-
-    ul#song-list li:hover {
-      background: #333;
-    }
-
-    ul#song-list li.active {
-      font-weight: bold;
-      color: #1db954;
-    }
-	
-
-
+  ul#song-list li.active {
+    font-weight: bold;
+    color: #1db954;
+  }
 	</style>
 	</head>
 
@@ -621,102 +622,103 @@ body {
 
 
 
- <script>
-    const songs = [
-      {
-        title: "MY PRAYER - the platter",
-        src: "https://files.catbox.moe/nw10rq.mp3"
-      },
-      {
-        title: "",
-        src: ""
-      },
-      {
-        title: "",
-        src: ""
-      }
-    ];
+<script>
+  const songs = [
+    {
+      title: "MY PRAYER - The Platters",
+      src: "https://files.catbox.moe/nw10rq.mp3"
+    },
+    {
+      title: "SoundHelix Song 2",
+      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"
+    },
+    {
+      title: "SoundHelix Song 3",
+      src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+    }
+  ];
 
-    let currentSong = 0;
+  let currentSong = 0;
 
-    const audio = document.getElementById('audio-player');
-    const songTitle = document.getElementById('song-title');
-    const playBtn = document.getElementById('play-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const vinyl = document.getElementById('vinyl');
-    const modal = document.getElementById('song-modal');
-    const closeModal = document.getElementById('close-modal');
-    const songList = document.getElementById('song-list');
+  const audio = document.getElementById('audio-player');
+  const songTitle = document.getElementById('song-title');
+  const playBtn = document.getElementById('play-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const vinyl = document.getElementById('vinyl');
+  const modal = document.getElementById('song-modal');
+  const closeModal = document.getElementById('close-modal');
+  const songList = document.getElementById('song-list');
 
-    // Load current song
-    function loadSong(index) {
-      currentSong = index;
-      audio.src = songs[index].src;
-      songTitle.textContent = songs[index].title;
+  // Load current song
+  function loadSong(index) {
+    currentSong = index;
+    audio.src = songs[index].src;
+    songTitle.textContent = songs[index].title;
+    audio.play();
+    playBtn.textContent = '⏸️';
+    updateSongListUI();
+  }
+
+  // Play/Pause toggle
+  playBtn.addEventListener('click', () => {
+    if (audio.src === '') {
+      loadSong(currentSong);
+      return;
+    }
+    if (audio.paused) {
       audio.play();
       playBtn.textContent = '⏸️';
-      updateSongListUI();
+    } else {
+      audio.pause();
+      playBtn.textContent = '▶️';
     }
+  });
 
-    // Play/Pause toggle
-    playBtn.addEventListener('click', () => {
-      if (audio.src === '') {
-        loadSong(currentSong);
-        return;
-      }
-      if (audio.paused) {
-        audio.play();
-        playBtn.textContent = '⏸️';
-      } else {
-        audio.pause();
-        playBtn.textContent = '▶️';
-      }
-    });
+  // Next song
+  nextBtn.addEventListener('click', () => {
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong(currentSong);
+  });
 
-    // Next song
-    nextBtn.addEventListener('click', () => {
-      currentSong = (currentSong + 1) % songs.length;
-      loadSong(currentSong);
-    });
+  // Auto-play next song
+  audio.addEventListener('ended', () => {
+    currentSong = (currentSong + 1) % songs.length;
+    loadSong(currentSong);
+  });
 
-    // Auto-play next song
-    audio.addEventListener('ended', () => {
-      currentSong = (currentSong + 1) % songs.length;
-      loadSong(currentSong);
-    });
+  // Show modal
+  vinyl.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
 
-    // Show modal
-    vinyl.addEventListener('click', () => {
-      modal.style.display = 'block';
-    });
+  // Close modal
+  closeModal.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
 
-    // Close modal
-    closeModal.addEventListener('click', () => {
+  // Click outside modal to close
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
       modal.style.display = 'none';
-    });
-
-    // Click outside modal to close
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-
-    // Build song list in modal
-    function updateSongListUI() {
-      songList.innerHTML = '';
-      songs.forEach((song, index) => {
-        const li = document.createElement('li');
-        li.textContent = song.title;
-        if (index === currentSong) li.classList.add('active');
-        li.addEventListener('click', () => {
-          loadSong(index);
-          modal.style.display = 'none';
-        });
-        songList.appendChild(li);
-      });
     }
+  });
 
-    // Initialize list on page load
-    updateSongListUI();
-  </script>
+  // Build song list in modal
+  function updateSongListUI() {
+    songList.innerHTML = '';
+    songs.forEach((song, index) => {
+      const li = document.createElement('li');
+      li.textContent = song.title;
+      if (index === currentSong) li.classList.add('active');
+      li.addEventListener('click', () => {
+        loadSong(index);
+        modal.style.display = 'none';
+      });
+      songList.appendChild(li);
+    });
+  }
+
+  // Initial load
+  updateSongListUI();
+  loadSong(currentSong);
+</script>
