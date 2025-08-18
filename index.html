@@ -596,8 +596,7 @@ z-index: 1;
 	</style>
 	</head>
 
-		
-</html>
+
 
 
 
@@ -635,7 +634,7 @@ z-index: 1;
   const playBtn = document.getElementById('play-btn');
   const nextBtn = document.getElementById('next-btn');
   const vinyl = document.getElementById('vinyl');
-  const modal = document.getElementById('song-modal');
+  const songmodal = document.getElementById('song-modal');
   const closeModal = document.getElementById('close-modal');
   const songList = document.getElementById('song-list');
 
@@ -644,8 +643,6 @@ z-index: 1;
     currentSong = index;
     audio.src = songs[index].src;
     songTitle.textContent = songs[index].title;
-    audio.play();
-    playBtn.textContent = '⏸️';
     updateSongListUI();
   }
 
