@@ -499,8 +499,8 @@ z-index: 1;
   }
 
   .vinyl {
-     width: 200px;
-  height: 200px;
+     width: 100px;
+  height: 100px;
   cursor: pointer;
   animation: spin 4s linear infinite; /* Always spinning */
   }
@@ -710,7 +710,30 @@ z-index: 1;
 
 
 
+<script>
+// Everyday Carry Image Modal (clickable-image)
+const imageModal = document.getElementById("imageModal");
+const modalImg = document.getElementById("modalImage");
+const closeImgModal = imageModal.querySelector(".close");
 
+document.querySelectorAll(".clickable-image").forEach(img => {
+  img.addEventListener("click", () => {
+    modalImg.src = img.src;
+    imageModal.style.display = "block";
+  });
+});
+
+closeImgModal.addEventListener("click", () => {
+  imageModal.style.display = "none";
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === imageModal) {
+    imageModal.style.display = "none";
+  }
+});
+</script>
+		
 		
 </body>
 </html>
