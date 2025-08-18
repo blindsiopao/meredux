@@ -499,15 +499,13 @@ z-index: 1;
   }
 
   .vinyl {
-    width: 200px;
-    height: 200px;
-    transition: transform 0.3s;
-    cursor: pointer;
+     width: 200px;
+  height: 200px;
+  cursor: pointer;
+  animation: spin 4s linear infinite; /* Always spinning */
   }
 
-  .vinyl:hover {
-    animation: spin 4s linear infinite;
-  }
+
 
   @keyframes spin {
     100% {
