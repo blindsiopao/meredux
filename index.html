@@ -57,8 +57,17 @@
 
   
 
- <div class="vinyl-wrapper"> <img src="https://i.imgur.com/MglggeP.png" class="vinyl" id="vinyl" alt="Vinyl Record"> <div class="info-bar"> <span id="song-title">No song playing</span> <button id="play-btn">▶</button> <button id="next-btn">⏭</button> </div> </div>
-
+ <div class="vinyl-wrapper"> <img src="https://i.imgur.com/MglggeP.png" class="vinyl" id="vinyl" alt="Vinyl Record"> 
+	 
+	 <div class="info-bar">
+  <div class="song-text">
+    MY PRAYER - The Platters
+  </div>
+  <div class="song-controls">
+    <button id="play-btn">▶</button>
+    <button id="next-btn">⏭</button>
+  </div>
+	 </div>
 
   <div class="modal" id="song-modal">
     <div class="modal-content">
@@ -479,27 +488,40 @@ z-index: 1;
 
 	.info-bar {
   position: absolute;
-  bottom: -35px;         /* distance below the vinyl */
+  bottom: -50px;         
   left: 0;
   right: 0;
-  height: 40px;          /* fixed height */
+  width: 120px;          
   background: rgba(0, 0, 0, 0.8);
   display: none;
-  justify-content: space-between; /* space between title and buttons */
-  align-items: center;            /* vertical centering */
-  padding: 0 10px;                /* horizontal padding */
+  flex-direction: column;  
+  align-items: center;     
+  justify-content: center; 
+  padding: 5px;
   border-radius: 5px;
-  box-sizing: border-box;         /* include padding in height */
-  overflow: hidden;               /* prevent text from spilling out */
-  font-size: 12px;                /* smaller text for thin bar */
-  white-space: nowrap;            /* prevent wrapping */
-  text-overflow: ellipsis;        /* add "..." if text too long */
+  box-sizing: border-box;
+  font-size: 12px;
+  text-align: center;      
+}
 
-	}
-  .vinyl-wrapper:hover .info-bar {
-    display: flex;
-  }
+.song-text {
+  margin-bottom: 5px;      
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
+  width: 100%;
+}
 
+.song-controls {
+  display: flex;
+  justify-content: center;
+  gap: 5px;                
+}
+
+/* Show on hover */
+.vinyl-wrapper:hover .info-bar {
+  display: flex;
+}
   button {
    background: none;
   border: none;
