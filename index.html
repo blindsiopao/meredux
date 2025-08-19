@@ -477,15 +477,19 @@ z-index: 1;
   }
 
  .info-bar { position: absolute; 
-bottom: -50px;
+bottom: -40px;
 left: 0; 
 right: 0; 
 background: rgba(0, 0, 0, 0.8); 
 display: none; 
 justify-content: space-around; 
 align-items: center; 
-padding: 10px; 
-border-radius: 5px; }
+height: 30px;          /* fixed thin height */
+  line-height: 30px;     /* keeps text vertically centered */
+  padding: 0 10px;       /* horizontal padding only */
+  border-radius: 5px;
+  font-size: 12px;      
+}
 
 
   .vinyl-wrapper:hover .info-bar {
@@ -617,10 +621,10 @@ border-radius: 5px; }
     }
     if (audio.paused) {
       audio.play();
-      playBtn.textContent = '⏸️';
+      playBtn.textContent = '⏸';
     } else {
       audio.pause();
-      playBtn.textContent = '▶️';
+      playBtn.textContent = '▶';
     }
   });
 
