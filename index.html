@@ -476,20 +476,22 @@ z-index: 1;
     }
   }
 
- .info-bar { position: absolute; 
-bottom: -40px;
-left: 0; 
-right: 0; 
-background: rgba(0, 0, 0, 0.8); 
-display: none; 
-justify-content: space-around; 
-align-items: center; 
-height: 30px;          /* fixed thin height */
-  line-height: 30px;     /* keeps text vertically centered */
-  padding: 0 10px;       /* horizontal padding only */
+  position: absolute;
+  bottom: -30px;         /* distance below the vinyl */
+  left: 0;
+  right: 0;
+  height: 25px;          /* fixed height */
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: space-between; /* space between title and buttons */
+  align-items: center;            /* vertical centering */
+  padding: 0 10px;                /* horizontal padding */
   border-radius: 5px;
-  font-size: 12px;      
-}
+  box-sizing: border-box;         /* include padding in height */
+  overflow: hidden;               /* prevent text from spilling out */
+  font-size: 12px;                /* smaller text for thin bar */
+  white-space: nowrap;            /* prevent wrapping */
+  text-overflow: ellipsis;        /* add "..." if text too long */
 
 
   .vinyl-wrapper:hover .info-bar {
