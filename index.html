@@ -35,11 +35,11 @@ line-height:14px;}
 
 
 a:link, a:visited, a:active { 
-color:#4F4527;text-decoration:none;}
-a:hover {color:#222;}
+color:#2E1B12;text-decoration:none;}
+a:hover {color:#2E1B12;}
 
 b {font-weight:bold;}
-i {color:#FFB755;font-style:normal;}
+i {color:#2E1B12;font-style:normal;}
 
 
 .title {background:#FDFBD5;text-transform:uppercase; font-family: 'Freckle Face', cursive; font-size:14px;
@@ -49,12 +49,12 @@ color:#381B0C;line-height:12px;padding-top:1px;padding-left:4px;border:1px solid
 #menu a { 
 background:transparent; font:9px 'silkscreen', monospace,georgia;
 text-transform:uppercase;font-style:normal;line-height:20px;
-padding:0px; letter-spacing:1px;margin-right:6px;color:#111;}
+padding:0px; letter-spacing:1px;margin-right:6px;color:#2E1B12;}
       
 #menu a:hover {
 background:transparent; font:9px 'silkscreen', monospace,georgia;
 text-transform:uppercase;font-style:normal;line-height:20px;
-padding:0px; letter-spacing:1px;margin-right:6px;color:#111;}
+padding:0px; letter-spacing:1px;margin-right:6px;color:#2E1B12;}
   
   
 
@@ -74,8 +74,8 @@ padding:0px; letter-spacing:1px;margin-right:6px;color:#111;}
  
 	.image-box {
   position: fixed;
-top: 295px; 
-left: 950px; 
+bottom: -90px; /* Adjust as needed to keep it above the taskbar */
+  left: calc(100% - 360px); /* Aligns with video-box */ 
   width: 400px;
   height: 400px;
    background: transparent;
@@ -89,8 +89,8 @@ left: 950px;
 
 	.video-box {
   position: fixed;
- top: 365.2px; 
- left: 986px; /* s  same as .image-box to align perfectly */
+  bottom: 80px; 
+  left: calc(100% - 325px); 
   width: 213px;
   height: 161px; /* 16:9 video aspect ratio */
   background: transparent;
@@ -281,6 +281,24 @@ z-index: 1;
   border-left: 1px solid #E39C46; /* Optional edge detail */
 }
  
+ 
+ 
+ 
+ 
+ 
+ .left-image-box {
+  position: fixed;
+  bottom: 0px; /* Anchored to bottom */
+  left: 0px;   /* Anchored to far left */
+  width: 100px; /* Adjust as needed */
+  height: auto;
+  z-index: 10;
+  background: transparent;
+}
+ 
+ 
+ 
+ 
 </style>
 </head>
 
@@ -291,12 +309,21 @@ z-index: 1;
 <body>
   
   
+  <div class="left-image-box">
+  <img src="https://i.imgur.com/FmhFu2g.png"  width="400">
+</div>
+  
+  
+  
+  
   	  <div class="video-box">
   <video id="video-player" controls width="100%" height="100%">
     <source src="https://files.catbox.moe/1zebhl.mp4" type="video/mp4">
     Your browser does not support the video tag.
   </video>
 </div>
+
+
 
 
 
@@ -372,7 +399,7 @@ z-index: 1;
 <td class="navigation" valign="top" height="20"> 
 <center>
 <div id="menu">
-<a href="https://what-meworry.neocities.org">Home</a> <a href="">Top 10 Songs!</a> <a href="">Photography</a> <a href="">Modern Delights</a> 
+<a href="https://what-meworry.neocities.org">Home</a> <a href="https://what-meworry.neocities.org/top10">Top 10 Songs !</a> <a href="">Photography</a> <a href="">Modern Delights</a> 
 </div>
 </center>
 </td>
@@ -392,7 +419,7 @@ z-index: 1;
   
 
   
-<div class="title"> <img src="https://i.imgur.com/idEsPOw.gif"> Userboxes!!</div>
+<div class="title"> <img src="https://i.imgur.com/idEsPOw.gif"> Userboxes !!</div>
 <img src="https://i.imgur.com/9E6uQrz.png" width="200">
 <img src="https://i.imgur.com/aZDD7y5.png" width="200">
 <img src="https://i.imgur.com/bOzqMZU.png" width="200">
@@ -418,17 +445,17 @@ z-index: 1;
 
 <br>'
 
+<center>
 <img src="https://i.imgur.com/sNOwpXK.png">
 <img src="https://i.imgur.com/TwB6l2X.png">
 <img src="https://i.imgur.com/cjsvzlc.png">
-<img src="https://i.imgur.com/VpkXFoD.png">
+</center>
 
 <br>
 
 <center>
 <img src="https://i.imgur.com/ijtDSJ4.gif">
 <img src="https://i.imgur.com/AtKU6Vo.gif">
-<img src="https://i.imgur.com/ILOWGpY.gif">
 <img src="https://i.imgur.com/YhhBghP.gif">
 <img src="https://i.imgur.com/TEVAq4J.gif">
 <img src="https://i.imgur.com/FRejwta.gif">
@@ -439,7 +466,7 @@ z-index: 1;
 <br>
 
 
-<div class="title"><img src="https://i.imgur.com/idEsPOw.gif"> Dig this! </div>
+<div class="title"><img src="https://i.imgur.com/idEsPOw.gif"> Dig this ! </div>
 
 <br>
 
@@ -449,8 +476,17 @@ z-index: 1;
   
   <br>
   
-  <center>You can find so many dvds of lesser known 50s, 60s, and 70s documentaries, tv shows, and movies!</center>
+  <center>You can find so many dvds of lesser known 50s, 60s, and 70s documentaries, tv shows, and movies !</center>
   
+  <br>
+  
+  <center><a href="https://www.lovingtheclassics.com">
+<img src="https://i.imgur.com/qHcUkWR.png">
+</a></center>
+  
+  <br>
+  
+  <center>This is where I got the complete DVD box set for The Smothers Brothers Comedy Hour !</center>
   
   
   
@@ -465,11 +501,11 @@ z-index: 1;
 <br>
 <br>
 
-<center>20th Century, 60s, 70s, 60s, 70s--that's what i'm all about! You may call me Judy, or Jude!</center>
+<center>20th Century, 60s, 70s, 60s, 70s--that's what i'm all about ! You may call me Judy, or Jude !</center>
 
 <br>
 
-<center>Judy is 22 as of 2025 and you can often find her with her eyes glued to her CRT teevee watching Columbo OR harrassing her family and coworkers with her film camera. She is vastly interested in becoming a DNA analyst, though college has been delayed till next year due to the Paul McCartney concert. Obviously, that was the correct choice!</center>
+<center>Judy is 22 as of 2025 and you can often find her with her eyes glued to her CRT teevee watching Columbo OR harrassing her family and coworkers with her film camera. She is vastly interested in becoming a DNA analyst, though college has been delayed till next year due to the Paul McCartney concert. Obviously, that was the correct choice !</center>
 
 <br>
 <br>
@@ -488,7 +524,7 @@ TWO:
 <br>
 <br>
 
-She loves to sew! She exclusively sews with patterns from the 60s and the 70s. She thinks if she could get good enough, it'd be totally far out to take commissions!
+She loves to sew! She exclusively sews with patterns from the 60s and the 70s. She thinks if she could get good enough, it'd be totally far out to take commissions !
 
 
 <br>
@@ -526,7 +562,7 @@ She can do a mean Twist.
 
   
 <div class="title"> <img src="https://i.imgur.com/idEsPOw.gif">
-My Everyday Carry! </div>
+My Everyday Carry ! </div>
 
 
 <center><img src="https://i.imgur.com/6mHJE86.jpeg"></center>
@@ -544,7 +580,7 @@ My Everyday Carry! </div>
 3 Wally The Duck 
 <br>
 <br>
-4) A Book!
+4) A Book !
 <br>
 <br>
 5) Canon FTb Camera
@@ -656,10 +692,6 @@ My Everyday Carry! </div>
                 path:"https://files.catbox.moe/puc1a1.mp3"
             },
             {
-                name:"DEAR MR. FANTASY - traffic (1967)",
-                path:"https://files.catbox.moe/0zx5jd.mp4"
-            },
-            {
                 name:"SKYLARK - hoagy carmichael (1956)",
                 path:"https://files.catbox.moe/lby1yu.mp3"
             },
@@ -670,6 +702,10 @@ My Everyday Carry! </div>
             {
                 name:"YEAR OF THE CAT - al stewart (1976)",
                 path:"https://files.catbox.moe/fd7i60.mp3"
+            },
+             {
+                name:"IM ONLY SLEEPING - the beatles (1966)",
+                path:"https://files.catbox.moe/er8nxg.mp3"
             }
         ];
         //
@@ -804,11 +840,16 @@ My Everyday Carry! </div>
          
          	<script>
   const videoPlaylist = [
+    
+    "https://files.catbox.moe/bwwmqs.mp4",
+    
+    "https://files.catbox.moe/zg46u7.mp4",
+    
     "https://files.catbox.moe/ve948s.mp4",
     
     "https://files.catbox.moe/zg46u7.mp4",
     
-    "https://files.catbox.moe/0zx5jd.mp4",
+    "https://files.catbox.moe/mri253.mp4",
     
     "https://files.catbox.moe/zg46u7.mp4",
     
@@ -845,5 +886,3 @@ My Everyday Carry! </div>
 </script>
          
 </HTML> 
-
-
